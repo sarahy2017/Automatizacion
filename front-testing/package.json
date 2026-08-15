@@ -1,0 +1,21 @@
+{
+  "name": "testing-saucedemo",
+  "version": "1.0.0",
+  "description": "Prueba técnica de automatización con Playwright",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:saucedemo": "npx playwright test tests/login.spec.js --reporter=list",
+    "test:home": "npx playwright test tests/home.spec.js --reporter=list",
+    "test:ui": "npx playwright test --ui",
+    "report": "npx playwright show-report"
+  },
+  "keywords": [],
+  "author": "Sarahy Cardozo",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.2.0"
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "info": {
+    "_postman_id": "bfa48235-23de-41f8-bc67-1ebe11d1d77a",
+    "name": "Testing",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "14985557"
+  },
+  "item": [
+    {
+      "name": "Módulo API",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Estatus válidos\", function () {\r",
+              "    const expectedStatusCodes = [201,400];\r",
+              "    pm.expect(pm.response.code).to.be.oneOf(expectedStatusCodes );\r",
+              "});\r",
+              "\r",
+              "var jsonData = pm.response.json();\r",
+              "\r",
+              "pm.test(\"ID Users\", function () {\r",
+              "    if (pm.response.code === 201) {\r",
+              "        pm.globals.set(\"id\", jsonData.id);\r",
+              "    }else {\r",
+              "        pm.test.skip(\"id no generado\");\r",
+              "    }\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "free_user_3HwCbpowbrn76jSyt11LRXxCqNZ",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"Test User\", \"job\": \"Automation Engineer\"}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://reqres.in/api/users",
+          "protocol": "https",
+          "host": [
+            "reqres",
+            "in"
+          ],
+          "path": [
+            "api",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "https://reqres.in{{id_usuario_creado}}",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Estatus válidos\", function () {\r",
+              "    const expectedStatusCodes = [200,404];\r",
+              "    pm.expect(pm.response.code).to.be.oneOf(expectedStatusCodes );\r",
+              "});\r",
+              "\r",
+              "var jsonData = pm.response.json();\r",
+              "\r",
+              "pm.test(\"El nombre del usuario es correcto\", function () {\r",
+              "    if (pm.response.code === 200) {\r",
+              "        pm.expect(jsonData.data.first_name).to.eql(\"Test User\");\r",
+              "    } else {\r",
+              "        pm.test.skip(\"No se guardo el id. data simulada\");\r",
+              "    }\r",
+              "});\r",
+              "\r",
+              "pm.test(\"El trabajo del usuario es correcto\", function () {\r",
+              "    if (pm.response.code === 200) {\r",
+              "        pm.expect(jsonData.data.job).to.eql(\"Automation Engineer\");\r",
+              "    } else {\r",
+              "        pm.test.skip(\"no se guardo el id. data simulada\");\r",
+              "    }\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "free_user_3HwCbpowbrn76jSyt11LRXxCqNZ",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://reqres.in/api/users/{{id}}",
+          "protocol": "https",
+          "host": [
+            "reqres",
+            "in"
+          ],
+          "path": [
+            "api",
+            "users",
+            "{{id}}"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": "",
+              "type": "text",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
